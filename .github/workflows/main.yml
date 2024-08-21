@@ -29,6 +29,5 @@ jobs:
     - name: Deploy to GitHub Pages
       uses: peaceiris/actions-gh-pages@v3
       with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: gh-pages  # GitHub Pages için kullanmak istediğiniz branch
+        github_token: ${{ secrets.GITHUB_TOKEN }}  # PAT kullanıyorsanız personal_token: ${{ secrets.PAT }}
         publish_dir: ./_site  # Jekyll site çıktısının bulunduğu dizin
