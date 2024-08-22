@@ -1,33 +1,19 @@
-name: Deploy Jekyll site to GitHub Pages
+name: jekyll-cd
 
 on:
   push:
     branches:
-      - main  # Bu iş akışını 'main' şubesine yapılan itmelerde çalıştırır
+      - main
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out the repository
-      uses: actions/checkout@v3
-
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: '3.1'  # Kullandığınız Ruby sürümüne göre ayarlayın
-
-    - name: Install dependencies
-      run: |
-        gem install bundler
-        bundle install
-
-    - name: Build the site
-      run: bundle exec jekyll build
-
-    - name: Deploy to GitHub Pages
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}  # PAT kullanıyorsanız personal_token: ${{ secrets.PAT }}
-        publish_dir: ./_site  # Jekyll site çıktısının bulunduğu dizin
+      - name: 🛎 Check out master
+        uses: actions/checkout@master
+        with:
+          fetch-depth: 1
+      - name: 🧪 Build and deploy
+        uses: victoriadrake/jekyll-cd@master
